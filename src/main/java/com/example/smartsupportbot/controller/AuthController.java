@@ -29,7 +29,7 @@ public class AuthController {
     @PostMapping("/login")
     public AuthResponse loginUser(@RequestBody LoginRequest request){
         User user = authService.authenticate(request);
-        String token = jwtUtil.getToken(request.getEmail());
+        String token = jwtUtil.generateToken(request.getEmail());
         return new AuthResponse(token);
     }
 }

@@ -24,15 +24,17 @@ public class JWTUtil {
     }
 
     public String generateToken(String email){
-        return Jwts.builder()
+          String token = Jwts.builder()
                 .setSubject(email)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis()+expiration))
                 .signWith(getSigningKey(),SignatureAlgorithm.HS256)
                 .compact();
+        System.out.println(token);
+        return token;
     }
 
-    public String getToken(String token){
+    public String extractEmail(String token){
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
