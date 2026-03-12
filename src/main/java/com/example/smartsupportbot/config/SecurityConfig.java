@@ -22,7 +22,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()// allow login & register
+                        .requestMatchers("/auth/**","/chat/**").permitAll()// allow login & register
                         .anyRequest().authenticated()             // protect all others
                 ).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).build();
     }
